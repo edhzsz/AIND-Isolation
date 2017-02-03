@@ -207,19 +207,30 @@ class CustomPlayer:
         # Perform any required initializations, including selecting an initial
         # move from the game board (i.e., an opening book), or returning
         # immediately if there are no legal moves
+        move = (-1, -1)
+        search_method = self.minimax if self.method == 'minimax' else self.alphabeta
+        max_depth = 10000 if self.iterative else self.search_depth
+        start_depth = 1 if self.iterative else self.search_depth
+
         if not legal_moves:
-            return (-1, -1)
+            return move
 
         try:
             # The search method call (alpha beta or minimax) should happen in
             # here in order to avoid timeout. The try/except block will
             # automatically catch the exception raised by the search method
             # when the timer gets close to expiring
-            _, move = max([(self.score(game.forecast_move(m), self), m) for m in legal_moves])
+            depth = start_depth
+            while depth <= max_depth:
+                _, move = max([
+                    search_method(game.forecast_move(m), depth) for m in legal_moves
+                    ])
+                depth = depth + 1
 
         except Timeout:
-            # Handle any actions required at timeout, if necessary
-            pass
+            # if move is invalid (i.e (-1, -1)) after timeout select randomly one of the legal moves
+            if move == (-1, -1):
+                move = legal_moves[randint(0, len(legal_moves) - 1)]
 
         # Return the best move from the last completed search iteration
         return move
