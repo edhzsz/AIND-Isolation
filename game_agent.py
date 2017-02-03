@@ -207,7 +207,9 @@ class CustomPlayer:
         # move from the game board (i.e., an opening book), or returning
         # immediately if there are no legal moves
         move = (-1, -1)
-        search_method = self.minimax if self.method == 'minimax' else self.alphabeta
+        search_method = (self.minimax
+                         if self.method == 'minimax'
+                         else self.alphabeta)
         max_depth = 10000 if self.iterative else self.search_depth
         start_depth = 1 if self.iterative else self.search_depth
 
@@ -222,12 +224,14 @@ class CustomPlayer:
             depth = start_depth
             while depth <= max_depth:
                 _, move = max([
-                    search_method(game.forecast_move(m), depth) for m in legal_moves
+                    search_method(game.forecast_move(m), depth)
+                    for m in legal_moves
                     ])
                 depth = depth + 1
 
         except Timeout:
-            # if move is invalid (i.e (-1, -1)) after timeout select randomly one of the legal moves
+            # if move is invalid (i.e (-1, -1)) after timeout select randomly
+            #  one of the legal moves
             if move == (-1, -1):
                 move = legal_moves[random.randint(0, len(legal_moves) - 1)]
 
