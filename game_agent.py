@@ -8,7 +8,6 @@ relative strength using tournament.py and include the results in your report.
 """
 import random
 
-
 class Timeout(Exception):
     """Subclass base exception for code clarity."""
     pass
@@ -230,7 +229,7 @@ class CustomPlayer:
         except Timeout:
             # if move is invalid (i.e (-1, -1)) after timeout select randomly one of the legal moves
             if move == (-1, -1):
-                move = legal_moves[randint(0, len(legal_moves) - 1)]
+                move = legal_moves[random.randint(0, len(legal_moves) - 1)]
 
         # Return the best move from the last completed search iteration
         return move
