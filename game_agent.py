@@ -223,10 +223,7 @@ class CustomPlayer:
             # when the timer gets close to expiring
             depth = start_depth
             while depth <= max_depth:
-                _, move = max([
-                    search_method(game.forecast_move(m), depth)
-                    for m in legal_moves
-                    ])
+                _, move = search_method(game, depth)
                 depth = depth + 1
 
         except Timeout:
@@ -266,7 +263,37 @@ class CustomPlayer:
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
-        return 0., (-1, -1)
+        print(game.print_board())
+
+        legal_moves = game.get_legal_moves()
+
+        if not legal_moves:
+            return game.utility(game.active_player), (-1, -1)
+
+        aggregate_fn = max if maximizing_player else min
+
+        if depth == 1:
+            scored_movements = ([
+                (self.score(game.forecast_move(m), game.active_player), m)
+                for m in legal_moves
+                ])
+        else:
+            scored_movements = ([
+                (self.minimax(game.forecast_move(m), depth - 1, not maximizing_player), m)
+                for m in legal_moves
+                ])
+
+            scored_movements = [(s, m) for ((s, _), m) in scored_movements]
+
+        #print([game.forecast_move(m).get_legal_moves() for m in legal_moves])
+
+        print("Scored moves at depth {}".format(depth))
+        print(legal_moves)
+        print(scored_movements)
+        print(aggregate_fn(scored_movements))
+        print ("-------------")
+
+        return aggregate_fn(scored_movements)
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf"),
                   maximizing_player=True):
