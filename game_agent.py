@@ -268,78 +268,36 @@ class CustomPlayer:
         if not legal_moves:
             return game.utility(game.active_player), (-1, -1)
 
+        if depth == 0:
+            return self.score(game, self), (-1, -1)
+
         aggregate_fn = max if maximizing_player else min
-        evaluate_fn = self.evaluate_score if depth == 1 else self.evaluate_minimax
 
-        return aggregate_fn([
-            evaluate_fn(game, m, depth - 1, not maximizing_player)
-            for m in legal_moves
-            ])
+        def unwrap_minimax(game, move):
+            """Use an inner function to evaluate and unwrap the result of
+            calling minimax for the branch of the movement.
 
-    def evaluate_score(self, game, move, depth, maximizing_player):
-        """Evaluates the score of a movement.
-        This method is a wrapper over the score function used only to share the
-        API with a method that evaluates a branch using the minimax function.
+            Parameters
+            ----------
+            game : isolation.Board
+                An instance of the Isolation game `Board` class representing the
+                current game state
 
-        Parameters
-        ----------
-        game : isolation.Board
-            An instance of the Isolation game `Board` class representing the
-            current game state
+            move : tuple(int, int)
+                the move that generates the branch being evaluated
 
-        move: tuple(int, int)
-            The movement being evaluated.
+            Returns
+            ----------
+            float
+                The score for the current search branch
 
-        depth : int
-            Depth is an integer representing the maximum number of plies to
-            search in the game tree before aborting
+            tuple(int, int)
+                the move that generates the branch being evaluated
+            """
+            score, _ = self.minimax(game.forecast_move(move), depth - 1, not maximizing_player)
+            return score, move
 
-        maximizing_player : bool
-            Flag indicating whether the current search depth corresponds to a
-            maximizing layer (True) or a minimizing layer (False)
-
-        Returns
-        ----------
-        float
-            The score for the move being evaluated.
-
-        tuple(int, int)
-            The movement being evaluated
-        """
-        return self.score(game.forecast_move(move), self), move
-
-    def evaluate_minimax(self, game, move, depth, maximizing_player):
-        """Evaluates the minimax score for the branch of a movement.
-        This method is a wrapper over the minimax function used only to share the
-        API with a method that evaluates the score function.
-
-        Parameters
-        ----------
-        game : isolation.Board
-            An instance of the Isolation game `Board` class representing the
-            current game state
-
-        move: tuple(int, int)
-            The movement being evaluated.
-
-        depth : int
-            Depth is an integer representing the maximum number of plies to
-            search in the game tree before aborting
-
-        maximizing_player : bool
-            Flag indicating whether the current search depth corresponds to a
-            maximizing layer (True) or a minimizing layer (False)
-
-        Returns
-        ----------
-        float
-            The minimax score for the search branch of the movement
-
-        tuple(int, int)
-            The movement being evaluated
-        """
-        score, _ = self.minimax(game.forecast_move(move), depth, maximizing_player)
-        return score, move
+        return aggregate_fn([unwrap_minimax(game, m) for m in legal_moves])
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf"),
                   maximizing_player=True):
@@ -376,5 +334,17 @@ class CustomPlayer:
         """
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
+
+        legal_moves = game.get_legal_moves()
+
+        if not legal_moves:
+            return game.utility(game.active_player), (-1, -1)
+
+        if depth == 0:
+            return self.score(game, self), (-1, -1)
+
+        aggregate_fn = max if maximizing_player else min
+
+
 
         return 0., (-1, -1)
