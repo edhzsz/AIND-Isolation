@@ -273,31 +273,18 @@ class CustomPlayer:
 
         aggregate_fn = max if maximizing_player else min
 
-        def unwrap_minimax(game, move):
-            """Use an inner function to evaluate and unwrap the result of
-            calling minimax for the branch of the movement.
+        best_score = float("-inf") if maximizing_player else float("inf")
+        best_move = (-1, -1)
 
-            Parameters
-            ----------
-            game : isolation.Board
-                An instance of the Isolation game `Board` class representing the
-                current game state
+        for move in legal_moves:
+            score, _ = self.minimax(
+                game.forecast_move(move), depth - 1, not maximizing_player)
 
-            move : tuple(int, int)
-                the move that generates the branch being evaluated
+            if score != best_score and score == aggregate_fn(score, best_score):
+                best_score = score
+                best_move = move
 
-            Returns
-            ----------
-            float
-                The score for the current search branch
-
-            tuple(int, int)
-                the move that generates the branch being evaluated
-            """
-            score, _ = self.minimax(game.forecast_move(move), depth - 1, not maximizing_player)
-            return score, move
-
-        return aggregate_fn([unwrap_minimax(game, m) for m in legal_moves])
+        return (best_score, best_move)
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf"),
                   maximizing_player=True):
@@ -343,8 +330,31 @@ class CustomPlayer:
         if depth == 0:
             return self.score(game, self), (-1, -1)
 
-        aggregate_fn = max if maximizing_player else min
+        best_score = float("-inf") if maximizing_player else float("inf")
+        best_move = (-1, -1)
+
+        for move in legal_moves:
+            branch_score, _ = self.alphabeta(
+                game.forecast_move(move), depth - 1, alpha, beta, not maximizing_player)
+
+            if maximizing_player:
+                if branch_score > best_score:
+                    best_score = branch_score
+                    best_move = move
+
+                if best_score >= beta:
+                    return (best_score, best_move)
+
+                alpha = max(alpha, best_score)
+            else:
+                if branch_score < best_score:
+                    best_score = branch_score
+                    best_move = move
+
+                if best_score <= alpha:
+                    return (best_score, best_move)
+
+                beta = min(beta, best_score)
 
 
-
-        return 0., (-1, -1)
+        return best_score, best_move
