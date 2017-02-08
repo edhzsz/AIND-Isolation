@@ -7,6 +7,7 @@ You must test your agent's strength against a set of agents with known
 relative strength using tournament.py and include the results in your report.
 """
 import random
+from isolation import Board
 
 class Timeout(Exception):
     """Subclass base exception for code clarity."""
@@ -128,8 +129,53 @@ def custom_score(game, player):
 
     return improved_score(game, player)
 
+def get_representations(self, board_representations_cache,  maximizing_player):
+    cache_key = self.to_string()
 
-class CustomPlayer:
+    if board_representations_cache.get(cache_key):
+        return board_representations_cache.get(cache_key)
+
+    p1_loc = self.__last_player_move__[self.__player_1__]
+    p2_loc = self.__last_player_move__[self.__player_2__]
+
+    xid = ''
+    x180 = ''
+
+    def __get_char__(row, col):
+        if not self.__board_state__[row][col]:
+            return ' '
+        elif p1_loc and row == p1_loc[0] and col == p1_loc[1]:
+            return '1'
+        elif p2_loc and row == p2_loc[0] and col == p2_loc[1]:
+            return '2'
+
+        return '-'
+
+    # board is not square, only generate identity
+    if self.height != self.width:
+        for i in range(self.height):
+            for j in range(self.width):
+                xid += __get_char__(i, j)
+
+        return [xid]
+
+    for i in range(self.height):
+        for j in range(self.width):
+            xid += __get_char__(i, j)
+            x180 += __get_char__(self.height - i - 1, self.width - j - 1)
+
+    representations = [
+        xid,
+        x180
+        ]
+
+    board_representations_cache[cache_key] = representations
+
+    return representations
+
+Board.get_representations = get_representations
+
+class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
     and a depth-limited minimax algorithm with alpha-beta pruning. You must
     finish and test this player to make sure it properly uses minimax and
@@ -216,7 +262,10 @@ class CustomPlayer:
         search_method = (self.minimax
                          if self.method == 'minimax'
                          else self.alphabeta)
-        max_depth = 10000 if self.iterative else self.search_depth
+        max_depth = (
+            len(game.get_blank_spaces()) + 1 if self.iterative
+            else self.search_depth
+            )
         start_depth = 0 if self.iterative else self.search_depth
 
         if not legal_moves:
@@ -232,7 +281,7 @@ class CustomPlayer:
                 # reset the board score cache on each iteration as the score
                 # will be updated with the values from the new depth
                 self.board_score_cache = {}
-                _, move = search_method(game, depth, first_call=True, original_depth=depth)
+                _, move = search_method(game, depth)
                 depth = depth + 1
 
         except Timeout:
@@ -244,69 +293,7 @@ class CustomPlayer:
         # Return the best move from the last completed search iteration
         return move
 
-    def __get_proyections__(self, game):
-        row_proyection = [game.height for i in range(game.width)]
-        col_proyection = [game.width for i in range(game.height)]
-
-        for clean_pos in game.get_blank_spaces():
-            cp_r, cp_c = clean_pos
-            row_proyection[cp_c] -= 1
-            col_proyection[cp_r] -= 1
-
-        if game.get_player_location(self):
-            p1_r, p1_c = game.get_player_location(self)
-            col_proyection[p1_r] += 99
-            row_proyection[p1_c] += 99
-
-        if game.get_player_location(game.get_opponent(self)):
-            p2_r, p2_c = game.get_player_location(game.get_opponent(self))
-            row_proyection[p2_c] += 199
-            col_proyection[p2_r] += 199
-
-        return row_proyection, col_proyection
-
-    def __get_representations__(self, game, maximizing_player):
-        cache_key = (game)
-        if self.board_representations_cache.get(cache_key):
-            return self.board_representations_cache.get(cache_key)
-
-        sufix = "#1" if maximizing_player else "#2"
-        r_proyection, c_proyection = self.__get_proyections__(game)
-
-        sr_proyection = ','.join(str(x) for x in r_proyection)
-        sc_proyection = ','.join(str(x) for x in c_proyection)
-        srr_proyection = ','.join(str(x) for x in reversed(r_proyection))
-        src_proyection = ','.join(str(x) for x in reversed(c_proyection))
-
-        representations = [
-            sr_proyection + '#' + sc_proyection + sufix#,
-            #sc_proyection + '#' + sr_proyection + sufix,
-            #sr_proyection + '#' + src_proyection + sufix,
-            #src_proyection + '#' + sr_proyection + sufix,
-            #srr_proyection + '#' + sc_proyection + sufix,
-            #sc_proyection + '#' + srr_proyection + sufix,
-            #srr_proyection + '#' + src_proyection + sufix,
-            #src_proyection + '#' + srr_proyection + sufix
-            ]
-
-        self.board_representations_cache[cache_key] = representations
-
-        return representations
-
-    def __get_cached_score__(self, game, maximizing_player, print_hit=False):
-        representations = self.__get_representations__(game, maximizing_player)
-        main_rep = representations[0]
-
-        for rep in representations:
-            if self.board_score_cache.get(rep, False) != False:
-                c_score, c_move = self.board_score_cache.get(rep)
-                if print_hit:
-                    print(main_rep, rep, c_score, c_move)
-                return True, c_score, c_move, main_rep
-
-        return False, 0, (-1, -1), main_rep
-
-    def minimax(self, game, depth, maximizing_player=True, first_call=False, original_depth=0):
+    def minimax(self, game, depth, maximizing_player=True):
         """Implement the minimax search algorithm as described in the lectures.
 
         Parameters
@@ -341,9 +328,10 @@ class CustomPlayer:
             raise Timeout()
 
         if self.use_cache:
-            found, c_score, c_move, move_rep = self.__get_cached_score__(game, maximizing_player)
+            found, board_rep = self.__get_cached_score__(game, maximizing_player)
 
-            if found:
+            if found != False:
+                c_score, c_move, c_alpha, c_beta, c_game = found
                 return c_score, c_move
 
         best_score = float("-inf") if maximizing_player else float("inf")
@@ -374,7 +362,7 @@ class CustomPlayer:
         return (best_score, best_move)
 
     def alphabeta(self, game, depth, alpha=float("-inf"), beta=float("inf"),
-                  maximizing_player=True, first_call=False, original_depth=0):
+                  maximizing_player=True):
         """Implement minimax search with alpha-beta pruning as described in the
         lectures.
 
@@ -412,16 +400,15 @@ class CustomPlayer:
                 to pass the project unit tests; you cannot call any other
                 evaluation function directly.
         """
-        cache_score, cache_mov = None, None
+        c_score, c_move = None, None
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
         if self.use_cache:
-            found, c_score, c_move, board_rep = self.__get_cached_score__(game, maximizing_player)
+            found, board_rep = self.__get_cached_score__(game, maximizing_player)
 
-            if found:
-                #return c_score, c_move
-                cache_score, cache_mov = c_score, c_move
+            if found != False:
+                return found
 
         best_score = float("-inf") if maximizing_player else float("inf")
         best_move = (-1, -1)
@@ -436,7 +423,7 @@ class CustomPlayer:
 
         for move in legal_moves:
             branch_score, _ = self.alphabeta(
-                game.forecast_move(move), depth - 1, alpha, beta, not maximizing_player, original_depth=original_depth)
+                game.forecast_move(move), depth - 1, alpha, beta, not maximizing_player)
 
             if maximizing_player:
                 if branch_score > best_score:
@@ -444,7 +431,7 @@ class CustomPlayer:
                     best_move = move
 
                 if best_score >= beta:
-                    return (best_score, best_move)
+                    break
 
                 alpha = max(alpha, best_score)
             else:
@@ -453,23 +440,23 @@ class CustomPlayer:
                     best_move = move
 
                 if best_score <= alpha:
-                    return (best_score, best_move)
+                    break
 
                 beta = min(beta, best_score)
 
         if self.use_cache:
-            if cache_score != None:
-                if cache_score != best_score:
-                    print ("--------------------------")
-                    print("Failed cache for {} with cached score {} and actual score {}".format(board_rep, cache_score, best_score))
-                    print(game.print_board())
-                    print("cached move: {}".format(cache_mov))
-                    print("best move: {}".format(best_move))
-                    self.__get_cached_score__(game, maximizing_player, True)
-                    print(depth, len(self.board_score_cache), original_depth)
-
             # cache the score for this branch
             self.board_score_cache[board_rep] = (best_score, best_move)
 
-
         return best_score, best_move
+
+    def __get_cached_score__(self, game, maximizing_player):
+        representations = game.get_representations(self.board_representations_cache, maximizing_player)
+        main_rep = representations[0]
+
+        for rep in representations:
+            if self.board_score_cache.get(rep, False) != False:
+                return (self.board_score_cache.get(rep), main_rep)
+
+        return (False, main_rep)
+
