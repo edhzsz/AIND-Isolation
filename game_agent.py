@@ -46,7 +46,30 @@ def get_cached_legal_moves(self, player=None):
 
     return valid_moves
 
+def cached_apply_move(self, move):
+    """
+    Move the active player to a specified location.
+
+    Parameters
+    ----------
+    move : (int, int)
+        A coordinate pair (row, column) indicating the next position for
+        the active player on the board.
+
+    Returns
+    ----------
+    None
+    """
+    row, col = move
+    self.__last_player_move__[self.active_player] = move
+    self.__board_state__[row][col] = self.__player_symbols__[self.active_player]
+    self.__active_player__, self.__inactive_player__ = self.__inactive_player__, self.__active_player__
+    self.move_count += 1
+    # clean the valid moves cache
+    self.moves_cache = {}
+
 Board.get_legal_moves = get_cached_legal_moves
+Board.apply_move = cached_apply_move
 
 def inverse_open_move_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
@@ -133,13 +156,15 @@ class CustomPlayer(object):
     """
 
     def __init__(self, search_depth=3, score_fn=custom_score,
-                 iterative=True, method='minimax', timeout=15.):
+                 iterative=True, method='minimax', timeout=10., verbose=False):
         self.search_depth = search_depth
         self.iterative = iterative
         self.score = score_fn
         self.method = method
         self.time_left = None
         self.TIMER_THRESHOLD = timeout
+        self.used_score_fn = False
+        self.verbose = verbose
 
     def get_move(self, game, legal_moves, time_left):
         """Search for the best move from the available legal moves and return a
@@ -183,17 +208,19 @@ class CustomPlayer(object):
         # move from the game board (i.e., an opening book), or returning
         # immediately if there are no legal moves
         move = (-1, -1)
+        score = 0.12345
+
+        if not legal_moves:
+            return move
+
         search_method = (self.minimax
                          if self.method == 'minimax'
                          else self.alphabeta)
         max_depth = (
-            100 if self.iterative
+            game.width * game.height if self.iterative
             else self.search_depth
             )
-        start_depth = 0 if self.iterative else self.search_depth
-
-        if not legal_moves:
-            return move
+        start_depth = 1 if self.iterative else self.search_depth
 
         try:
             # The search method call (alpha beta or minimax) should happen in
@@ -202,10 +229,14 @@ class CustomPlayer(object):
             # when the timer gets close to expiring
             depth = start_depth
             while depth <= max_depth:
+                self.used_score_fn = False
                 # reset the board score cache on each iteration as the score
                 # will be updated with the values from the new depth
-                _, move = search_method(game, depth)
+                score, move = search_method(game, depth)
                 depth = depth + 1
+
+                if not self.used_score_fn:
+                    break
 
         except Timeout:
             # if move is invalid (i.e (-1, -1)) after timeout select randomly
@@ -256,9 +287,10 @@ class CustomPlayer(object):
         legal_moves = game.get_legal_moves()
 
         if not legal_moves:
-            return game.utility(game.active_player), best_move
+            return self.score(game, self), best_move
 
         if depth == 0:
+            self.used_score_fn = True
             return self.score(game, self), best_move
 
         aggregate_fn = max if maximizing_player else min
@@ -318,12 +350,20 @@ class CustomPlayer(object):
         best_score = float("-inf") if maximizing_player else float("inf")
         best_move = (-1, -1)
 
+        # if alpha or beta are maxed up, just give up early
+        if maximizing_player and beta == float("-inf"):
+            return (best_score, best_move)
+
+        if not maximizing_player and alpha == float("inf"):
+            return (best_score, best_move)
+
         legal_moves = game.get_legal_moves()
 
         if not legal_moves:
-            return game.utility(game.active_player), best_move
+            return self.score(game, self), best_move
 
         if depth == 0:
+            self.used_score_fn = True
             return self.score(game, self), best_move
 
         for move in legal_moves:
