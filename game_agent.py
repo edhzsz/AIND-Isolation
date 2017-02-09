@@ -13,37 +13,42 @@ class Timeout(Exception):
     """Subclass base exception for code clarity."""
     pass
 
-def null_score(game, player):
-    """This heuristic presumes no knowledge for non-terminal states, and
-    returns the same uninformative value for all other states.
+def get_cached_legal_moves(self, player=None):
+    """
+    Return the list of all legal moves for the specified player.
 
     Parameters
     ----------
-    game : `isolation.Board`
-        An instance of `isolation.Board` encoding the current state of the
-        game (e.g., player locations and blocked cells).
-
-    player : hashable
-        One of the objects registered by the game object as a valid player.
-        (i.e., `player` should be either game.__player_1__ or
-        game.__player_2__).
+    player : object (optional)
+        An object registered as a player in the current game. If None,
+        return the legal moves for the active player on the board.
 
     Returns
     ----------
-    float
-        The heuristic value of the current game state.
+    list<(int, int)>
+        The list of coordinate pairs (row, column) of all legal moves
+        for the player constrained by the current game state.
     """
+    if not hasattr(self, 'moves_cache'):
+        self.moves_cache = {}
 
-    if game.is_loser(player):
-        return float("-inf")
+    if player is None:
+        player = self.active_player
 
-    if game.is_winner(player):
-        return float("inf")
+    valid_moves = self.moves_cache.get(player, None)
 
-    return 0.
+    if valid_moves:
+        return valid_moves
 
+    valid_moves = self.__get_moves__(self.__last_player_move__[player])
 
-def open_move_score(game, player):
+    self.moves_cache[player] = valid_moves
+
+    return valid_moves
+
+Board.get_legal_moves = get_cached_legal_moves
+
+def inverse_open_move_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
     equal to the number of moves open for your computer player on the board.
 
@@ -69,40 +74,7 @@ def open_move_score(game, player):
     if game.is_winner(player):
         return float("inf")
 
-    return float(len(game.get_legal_moves(player)))
-
-
-def improved_score(game, player):
-    """The "Improved" evaluation function discussed in lecture that outputs a
-    score equal to the difference in the number of moves available to the
-    two players.
-
-    Parameters
-    ----------
-    game : `isolation.Board`
-        An instance of `isolation.Board` encoding the current state of the
-        game (e.g., player locations and blocked cells).
-
-    player : hashable
-        One of the objects registered by the game object as a valid player.
-        (i.e., `player` should be either game.__player_1__ or
-        game.__player_2__).
-
-    Returns
-    ----------
-    float
-        The heuristic value of the current game state
-    """
-    if game.is_loser(player):
-        return float("-inf")
-
-    if game.is_winner(player):
-        return float("inf")
-
-    own_moves = len(game.get_legal_moves(player))
-    opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
-    return float(own_moves - opp_moves)
-
+    return 8.0 - float(len(game.get_legal_moves(player)))
 
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -127,53 +99,8 @@ def custom_score(game, player):
         The heuristic value of the current game state to the specified player.
     """
 
-    return improved_score(game, player)
 
-def get_representations(self, board_representations_cache,  maximizing_player):
-    cache_key = self.to_string()
-
-    if board_representations_cache.get(cache_key):
-        return board_representations_cache.get(cache_key)
-
-    p1_loc = self.__last_player_move__[self.__player_1__]
-    p2_loc = self.__last_player_move__[self.__player_2__]
-
-    xid = ''
-    x180 = ''
-
-    def __get_char__(row, col):
-        if not self.__board_state__[row][col]:
-            return ' '
-        elif p1_loc and row == p1_loc[0] and col == p1_loc[1]:
-            return '1'
-        elif p2_loc and row == p2_loc[0] and col == p2_loc[1]:
-            return '2'
-
-        return '-'
-
-    # board is not square, only generate identity
-    if self.height != self.width:
-        for i in range(self.height):
-            for j in range(self.width):
-                xid += __get_char__(i, j)
-
-        return [xid]
-
-    for i in range(self.height):
-        for j in range(self.width):
-            xid += __get_char__(i, j)
-            x180 += __get_char__(self.height - i - 1, self.width - j - 1)
-
-    representations = [
-        xid,
-        x180
-        ]
-
-    board_representations_cache[cache_key] = representations
-
-    return representations
-
-Board.get_representations = get_representations
+    return inverse_open_move_score(game, player)
 
 class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
@@ -206,16 +133,13 @@ class CustomPlayer(object):
     """
 
     def __init__(self, search_depth=3, score_fn=custom_score,
-                 iterative=True, method='minimax', timeout=15., use_cache=False):
+                 iterative=True, method='minimax', timeout=15.):
         self.search_depth = search_depth
         self.iterative = iterative
         self.score = score_fn
         self.method = method
         self.time_left = None
         self.TIMER_THRESHOLD = timeout
-        self.board_representations_cache = {}
-        self.board_score_cache = {}
-        self.use_cache = use_cache
 
     def get_move(self, game, legal_moves, time_left):
         """Search for the best move from the available legal moves and return a
@@ -263,7 +187,7 @@ class CustomPlayer(object):
                          if self.method == 'minimax'
                          else self.alphabeta)
         max_depth = (
-            len(game.get_blank_spaces()) + 1 if self.iterative
+            100 if self.iterative
             else self.search_depth
             )
         start_depth = 0 if self.iterative else self.search_depth
@@ -280,7 +204,6 @@ class CustomPlayer(object):
             while depth <= max_depth:
                 # reset the board score cache on each iteration as the score
                 # will be updated with the values from the new depth
-                self.board_score_cache = {}
                 _, move = search_method(game, depth)
                 depth = depth + 1
 
@@ -327,13 +250,6 @@ class CustomPlayer(object):
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
-        if self.use_cache:
-            found, board_rep = self.__get_cached_score__(game, maximizing_player)
-
-            if found != False:
-                c_score, c_move, c_alpha, c_beta, c_game = found
-                return c_score, c_move
-
         best_score = float("-inf") if maximizing_player else float("inf")
         best_move = (-1, -1)
 
@@ -354,10 +270,6 @@ class CustomPlayer(object):
             if score != best_score and score == aggregate_fn(score, best_score):
                 best_score = score
                 best_move = move
-
-        if self.use_cache:
-            # cache the score for this branch
-            self.board_score_cache[move_rep] = (best_score, best_move)
 
         return (best_score, best_move)
 
@@ -400,15 +312,8 @@ class CustomPlayer(object):
                 to pass the project unit tests; you cannot call any other
                 evaluation function directly.
         """
-        c_score, c_move = None, None
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
-
-        if self.use_cache:
-            found, board_rep = self.__get_cached_score__(game, maximizing_player)
-
-            if found != False:
-                return found
 
         best_score = float("-inf") if maximizing_player else float("inf")
         best_move = (-1, -1)
@@ -444,19 +349,6 @@ class CustomPlayer(object):
 
                 beta = min(beta, best_score)
 
-        if self.use_cache:
-            # cache the score for this branch
-            self.board_score_cache[board_rep] = (best_score, best_move)
-
         return best_score, best_move
 
-    def __get_cached_score__(self, game, maximizing_player):
-        representations = game.get_representations(self.board_representations_cache, maximizing_player)
-        main_rep = representations[0]
-
-        for rep in representations:
-            if self.board_score_cache.get(rep, False) != False:
-                return (self.board_score_cache.get(rep), main_rep)
-
-        return (False, main_rep)
 
