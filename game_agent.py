@@ -107,6 +107,42 @@ def minimize_opponent_moves_score(game, player):
 
     return 8 - len(opponent_moves)
 
+def minimize_opponent_moves_2_score(game, player):
+    """The basic evaluation function described in lecture that outputs a score
+    equal to the number of moves open for your computer player on the board.
+
+    Parameters
+    ----------
+    game : `isolation.Board`
+        An instance of `isolation.Board` encoding the current state of the
+        game (e.g., player locations and blocked cells).
+
+    player : hashable
+        One of the objects registered by the game object as a valid player.
+        (i.e., `player` should be either game.__player_1__ or
+        game.__player_2__).
+
+    Returns
+    ----------
+    float
+        The heuristic value of the current game state
+    """
+    if game.is_loser(player):
+        return float("-inf")
+
+    if game.is_winner(player):
+        return float("inf")
+
+
+    location = game.get_player_location(player)
+    moves = game.get_legal_moves(player)
+
+    opponent = game.get_opponent(player)
+    opponent_location = game.get_player_location(opponent)
+    opponent_moves = game.get_legal_moves(opponent)
+
+    return 16 - len(opponent_moves) + len(moves)
+
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
     of the given player.
@@ -129,9 +165,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-
-
-    return inverse_open_move_score(game, player)
+    return minimize_opponent_moves_2_score(game, player)
 
 class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
