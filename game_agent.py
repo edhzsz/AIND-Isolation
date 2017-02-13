@@ -71,7 +71,7 @@ def cached_apply_move(self, move):
 Board.get_legal_moves = get_cached_legal_moves
 Board.apply_move = cached_apply_move
 
-def inverse_open_move_score(game, player):
+def minimize_opponent_moves_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
     equal to the number of moves open for your computer player on the board.
 
@@ -97,7 +97,15 @@ def inverse_open_move_score(game, player):
     if game.is_winner(player):
         return float("inf")
 
-    return 8.0 - float(len(game.get_legal_moves(player)))
+
+    location = game.get_player_location(player)
+    moves = game.get_legal_moves(player)
+
+    opponent = game.get_opponent(player)
+    opponent_location = game.get_player_location(opponent)
+    opponent_moves = game.get_legal_moves(opponent)
+
+    return 8 - len(opponent_moves)
 
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
