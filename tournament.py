@@ -32,6 +32,7 @@ from sample_players import open_move_score
 from sample_players import improved_score
 from game_agent import CustomPlayer
 from game_agent import custom_score
+from game_agent import generate_custom_score
 
 NUM_MATCHES = 5  # number of matches against each opponent
 TIME_LIMIT = 150  # number of milliseconds before timeout
@@ -161,7 +162,7 @@ def main():
     # systems; i.e., the performance of the student agent is considered
     # relative to the performance of the ID_Improved agent to account for
     # faster or slower computers.
-    test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
+    test_agents = [#Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
                    Agent(CustomPlayer(score_fn=custom_score, **STUDENT_CUSTOM_ARGS), "Student")]
 
     print(DESCRIPTION)
@@ -178,6 +179,45 @@ def main():
         print("----------")
         print("{!s:<15}{:>10.2f}%".format(agentUT.name, win_ratio))
 
+def grid_search():
+    HEURISTICS = [("Null", null_score),
+                  ("Open", open_move_score),
+                  ("Improved", improved_score)]
+    AB_ARGS = {"search_depth": 5, "method": 'alphabeta', "iterative": False}
+    MM_ARGS = {"search_depth": 3, "method": 'minimax', "iterative": False}
+    CUSTOM_ARGS = {"method": 'alphabeta', 'iterative': True}
+    STUDENT_CUSTOM_ARGS = {"method": 'alphabeta', 'iterative': True}
+
+    mm_agents = [Agent(CustomPlayer(score_fn=h, **MM_ARGS),
+                       "MM_" + name) for name, h in HEURISTICS]
+    ab_agents = [Agent(CustomPlayer(score_fn=h, **AB_ARGS),
+                       "AB_" + name) for name, h in HEURISTICS]
+    random_agents = [Agent(RandomPlayer(), "Random")]
+
+    max_win_ratio = float("-inf")
+    max_parameters = (-10, -10, -20)
+
+    for a in range(-10, 10):
+        for b in range(-10, 10):
+            for c in range(-20, 20, 2):
+                print("")
+                print("*************************")
+                print("{:^25}".format("Evaluating: a={}, b={}, c={}".format(a,b,c)))
+                print("*************************")
+                agentUT = Agent(CustomPlayer(score_fn=generate_custom_score(a,b,c), **STUDENT_CUSTOM_ARGS), "Student")
+                agents = random_agents + mm_agents + ab_agents + [agentUT]
+                win_ratio = play_round(agents, NUM_MATCHES)
+
+                print("\n\nResults:")
+                print("----------")
+                print("{!s:<15}{:>10.2f}%".format(agentUT.name, win_ratio))
+
+                if win_ratio > max_win_ratio:
+                    max_win_ratio = win_ratio
+                    max_parameters = (a, b, c)
+
+                print("current best: {},".format(max_win_ratio) )
+                print("a={}, b={}, c={}".format(max_parameters[0], max_parameters[1], max_parameters[2]) )
 
 if __name__ == "__main__":
     main()

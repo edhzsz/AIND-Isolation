@@ -71,7 +71,7 @@ def cached_apply_move(self, move):
 Board.get_legal_moves = get_cached_legal_moves
 Board.apply_move = cached_apply_move
 
-def minimize_opponent_moves_score(game, player):
+def parametrized_moves_score(game, player, a, b, c):
     """The basic evaluation function described in lecture that outputs a score
     equal to the number of moves open for your computer player on the board.
 
@@ -97,17 +97,13 @@ def minimize_opponent_moves_score(game, player):
     if game.is_winner(player):
         return float("inf")
 
-
-    location = game.get_player_location(player)
     moves = game.get_legal_moves(player)
-
     opponent = game.get_opponent(player)
-    opponent_location = game.get_player_location(opponent)
     opponent_moves = game.get_legal_moves(opponent)
 
-    return 8 - len(opponent_moves)
+    return  a * len(moves) + b * len(opponent_moves) + c
 
-def minimize_opponent_moves_2_score(game, player):
+def common_moves_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
     equal to the number of moves open for your computer player on the board.
 
@@ -133,15 +129,30 @@ def minimize_opponent_moves_2_score(game, player):
     if game.is_winner(player):
         return float("inf")
 
-
-    location = game.get_player_location(player)
-    moves = game.get_legal_moves(player)
+    moves = set(game.get_legal_moves(player))
 
     opponent = game.get_opponent(player)
-    opponent_location = game.get_player_location(opponent)
-    opponent_moves = game.get_legal_moves(opponent)
+    opponent_moves = set(game.get_legal_moves(opponent))
 
-    return 16 - len(opponent_moves) + len(moves)
+    location = game.get_player_location(player)
+    opponent_location = game.get_player_location(opponent)
+
+    # intersection of common moves
+    common_moves = moves & opponent_moves
+    blocked_another_move = 0
+    if abs(location[0] - opponent_location[0]) + abs(location[1] - opponent_location[1]) == 3:
+        blocked_another_move = 1
+
+    return len(common_moves) + blocked_another_move
+
+
+def generate_custom_score(a = 2, b = -1, c=8):
+    def __score__(game, player):
+        return parametrized_moves_score(game, player, a, b, c)
+
+    return __score__
+
+
 
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -165,7 +176,8 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    return minimize_opponent_moves_2_score(game, player)
+
+    return common_moves_score(game, player)
 
 class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
@@ -198,7 +210,7 @@ class CustomPlayer(object):
     """
 
     def __init__(self, search_depth=3, score_fn=custom_score,
-                 iterative=True, method='minimax', timeout=10., verbose=False):
+                 iterative=True, method='minimax', timeout=20., verbose=False):
         self.search_depth = search_depth
         self.iterative = iterative
         self.score = score_fn
