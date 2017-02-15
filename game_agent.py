@@ -134,25 +134,50 @@ def common_moves_score(game, player):
     opponent = game.get_opponent(player)
     opponent_moves = set(game.get_legal_moves(opponent))
 
+    # intersection of common moves
+    common_moves = moves & opponent_moves
+    return len(common_moves)
+
+def distance_score(game, player):
+    """The basic evaluation function described in lecture that outputs a score
+    equal to the number of moves open for your computer player on the board.
+
+    Parameters
+    ----------
+    game : `isolation.Board`
+        An instance of `isolation.Board` encoding the current state of the
+        game (e.g., player locations and blocked cells).
+
+    player : hashable
+        One of the objects registered by the game object as a valid player.
+        (i.e., `player` should be either game.__player_1__ or
+        game.__player_2__).
+
+    Returns
+    ----------
+    float
+        The heuristic value of the current game state
+    """
+    if game.is_loser(player):
+        return float("-inf")
+
+    if game.is_winner(player):
+        return float("inf")
+
+    opponent = game.get_opponent(player)
+
     location = game.get_player_location(player)
     opponent_location = game.get_player_location(opponent)
 
-    # intersection of common moves
-    common_moves = moves & opponent_moves
-    blocked_another_move = 0
-    if abs(location[0] - opponent_location[0]) + abs(location[1] - opponent_location[1]) == 3:
-        blocked_another_move = 1
+    # distance from players
+    distance = abs(location[0] - opponent_location[0]) + abs(location[1] - opponent_location[1])
+    return distance
 
-    return len(common_moves) + blocked_another_move
-
-
-def generate_custom_score(a = 2, b = -1, c=8):
+def generate_custom_score(a, b, c):
     def __score__(game, player):
         return parametrized_moves_score(game, player, a, b, c)
 
     return __score__
-
-
 
 def custom_score(game, player):
     """Calculate the heuristic value of a game state from the point of view
@@ -176,8 +201,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-
-    return common_moves_score(game, player)
+    return parametrized_moves_score(game, player, 2, -1, 8) + distance_score(game, player)
 
 class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
@@ -293,11 +317,13 @@ class CustomPlayer(object):
                     break
 
         except Timeout:
-            # if move is invalid (i.e (-1, -1)) after timeout select randomly
-            #  one of the legal moves
-            if move == (-1, -1):
-                move = legal_moves[random.randint(0, len(legal_moves) - 1)]
+            pass
 
+        # if move is invalid (i.e (-1, -1)) after timeout or not found good move
+        # select randomly one of the legal moves
+        if move == (-1, -1):
+            move = legal_moves[random.randint(0, len(legal_moves) - 1)]
+        
         # Return the best move from the last completed search iteration
         return move
 
@@ -340,22 +366,21 @@ class CustomPlayer(object):
 
         legal_moves = game.get_legal_moves()
 
-        if not legal_moves:
+        if not legal_moves or depth == 0:
             return self.score(game, self), best_move
-
-        if depth == 0:
-            self.used_score_fn = True
-            return self.score(game, self), best_move
-
-        aggregate_fn = max if maximizing_player else min
 
         for move in legal_moves:
             score, _ = self.minimax(
                 game.forecast_move(move), depth - 1, not maximizing_player)
 
-            if score != best_score and score == aggregate_fn(score, best_score):
-                best_score = score
-                best_move = move
+            if maximizing_player:
+                if score > best_score:
+                    best_score = score
+                    best_move = move
+            else:
+                if score < best_score:
+                    best_score = score
+                    best_move = move
 
         return (best_score, best_move)
 
