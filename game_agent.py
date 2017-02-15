@@ -136,7 +136,7 @@ def common_moves_score(game, player):
 
     # intersection of common moves
     common_moves = moves & opponent_moves
-    return len(common_moves)
+    return len(moves) - len(common_moves)
 
 def distance_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
@@ -170,7 +170,8 @@ def distance_score(game, player):
     opponent_location = game.get_player_location(opponent)
 
     # distance from players
-    distance = abs(location[0] - opponent_location[0]) + abs(location[1] - opponent_location[1])
+    distance = (abs(location[0] - opponent_location[0])
+                + abs(location[1] - opponent_location[1]))
     return distance
 
 def generate_custom_score(a, b, c):
@@ -201,7 +202,11 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    return parametrized_moves_score(game, player, 2, -1, 8) + distance_score(game, player)
+    return (
+        parametrized_moves_score(game, player, 2, -1, 8)
+        + distance_score(game, player)
+        #+ common_moves_score(game, player)
+        )
 
 class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
