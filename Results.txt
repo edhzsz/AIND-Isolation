@@ -1,0 +1,827 @@
+Playing Matches:
+----------
+  Match 1:   Student   vs   Random      Result: 95 to 5
+  Match 2:   Student   vs   MM_Null     Result: 87 to 13
+  Match 3:   Student   vs   MM_Open     Result: 77 to 23
+  Match 4:   Student   vs MM_Improved   Result: 74 to 26
+  Match 5:   Student   vs   AB_Null     Result: 80 to 20
+  Match 6:   Student   vs   AB_Open     Result: 73 to 27
+  Match 7:   Student   vs AB_Improved   Result: 62 to 38
+Student             78.29%
+Student, 78.28571428571429%
+----------
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   Random      Result: 95 to 5
+  Match 2:   Student   vs   MM_Null     Result: 88 to 12
+  Match 3:   Student   vs   MM_Open     Result: 67 to 33
+  Match 4:   Student   vs MM_Improved   Result: 71 to 29
+  Match 5:   Student   vs   AB_Null     Result: 80 to 20
+  Match 6:   Student   vs   AB_Open     Result: 72 to 28
+  Match 7:   Student   vs AB_Improved   Result: 62 to 38
+Student             76.43%
+Student, 76.42857142857143%
+----------
+
+
+Grid search
+
+*************************
+Evaluating: a=1, b=2, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 81 to 19
+  Match 2:   Student   vs   AB_Open     Result: 62 to 38
+  Match 3:   Student   vs AB_Improved   Result: 60 to 40
+
+
+Results:
+----------
+Student             67.67%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=1, b=2, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 82 to 18
+  Match 2:   Student   vs   AB_Open     Result: 64 to 36
+  Match 3:   Student   vs AB_Improved   Result: 61 to 39
+
+
+Results:
+----------
+Student             69.00%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=1, b=2, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 79 to 21
+  Match 2:   Student   vs   AB_Open     Result: 67 to 33
+  Match 3:   Student   vs AB_Improved   Result: 64 to 36
+
+
+Results:
+----------
+Student             70.00%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=1, b=2, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 77 to 23
+  Match 2:   Student   vs   AB_Open     Result: 66 to 34
+  Match 3:   Student   vs AB_Improved   Result: 66 to 34
+
+
+Results:
+----------
+Student             69.67%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=1, b=2, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 63 to 37
+  Match 3:   Student   vs AB_Improved   Result: 60 to 40
+
+
+Results:
+----------
+Student             67.00%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=2, b=-3, c=-24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 77 to 23
+  Match 2:   Student   vs   AB_Open     Result: 72 to 28
+  Match 3:   Student   vs AB_Improved   Result: 74 to 26
+
+
+Results:
+----------
+Student             74.33%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=2, b=-3, c=-16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 79 to 21
+  Match 2:   Student   vs   AB_Open     Result: 69 to 31
+  Match 3:   Student   vs AB_Improved   Result: 62 to 38
+
+
+Results:
+----------
+Student             70.00%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=2, b=-3, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 77 to 23
+  Match 2:   Student   vs   AB_Open     Result: 75 to 25
+  Match 3:   Student   vs AB_Improved   Result: 66 to 34
+
+
+Results:
+----------
+Student             72.67%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=2, b=-3, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 80 to 20
+  Match 2:   Student   vs   AB_Open     Result: 73 to 27
+  Match 3:   Student   vs AB_Improved   Result: 66 to 34
+
+
+Results:
+----------
+Student             73.00%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=2, b=-3, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 76 to 24
+  Match 2:   Student   vs   AB_Open     Result: 67 to 33
+  Match 3:   Student   vs AB_Improved   Result: 63 to 37
+
+
+Results:
+----------
+Student             68.67%
+current best: 75.0,
+a=1, b=-3, c=-8
+
+*************************
+Evaluating: a=2, b=-3, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 87 to 13
+  Match 2:   Student   vs   AB_Open     Result: 69 to 31
+  Match 3:   Student   vs AB_Improved   Result: 70 to 30
+
+
+Results:
+----------
+Student             75.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-3, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 83 to 17
+  Match 2:   Student   vs   AB_Open     Result: 61 to 39
+  Match 3:   Student   vs AB_Improved   Result: 68 to 32
+
+
+Results:
+----------
+Student             70.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=-24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 83 to 17
+  Match 2:   Student   vs   AB_Open     Result: 71 to 29
+  Match 3:   Student   vs AB_Improved   Result: 68 to 32
+
+
+Results:
+----------
+Student             74.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=-16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 85 to 15
+  Match 2:   Student   vs   AB_Open     Result: 66 to 34
+  Match 3:   Student   vs AB_Improved   Result: 60 to 40
+
+
+Results:
+----------
+Student             70.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 70 to 30
+  Match 3:   Student   vs AB_Improved   Result: 62 to 38
+
+
+Results:
+----------
+Student             70.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 79 to 21
+  Match 2:   Student   vs   AB_Open     Result: 70 to 30
+  Match 3:   Student   vs AB_Improved   Result: 66 to 34
+
+
+Results:
+----------
+Student             71.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 84 to 16
+  Match 2:   Student   vs   AB_Open     Result: 67 to 33
+  Match 3:   Student   vs AB_Improved   Result: 72 to 28
+
+
+Results:
+----------
+Student             74.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 79 to 21
+  Match 2:   Student   vs   AB_Open     Result: 71 to 29
+  Match 3:   Student   vs AB_Improved   Result: 65 to 35
+
+
+Results:
+----------
+Student             71.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-2, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 74 to 26
+  Match 2:   Student   vs   AB_Open     Result: 69 to 31
+  Match 3:   Student   vs AB_Improved   Result: 67 to 33
+
+
+Results:
+----------
+Student             70.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=-24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 68 to 32
+  Match 3:   Student   vs AB_Improved   Result: 65 to 35
+
+
+Results:
+----------
+Student             70.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=-16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 76 to 24
+  Match 2:   Student   vs   AB_Open     Result: 67 to 33
+  Match 3:   Student   vs AB_Improved   Result: 70 to 30
+
+
+Results:
+----------
+Student             71.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 81 to 19
+  Match 2:   Student   vs   AB_Open     Result: 68 to 32
+  Match 3:   Student   vs AB_Improved   Result: 69 to 31
+
+
+Results:
+----------
+Student             72.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 82 to 18
+  Match 2:   Student   vs   AB_Open     Result: 64 to 36
+  Match 3:   Student   vs AB_Improved   Result: 69 to 31
+
+
+Results:
+----------
+Student             71.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 77 to 23
+  Match 2:   Student   vs   AB_Open     Result: 68 to 32
+  Match 3:   Student   vs AB_Improved   Result: 59 to 41
+
+
+Results:
+----------
+Student             68.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 80 to 20
+  Match 2:   Student   vs   AB_Open     Result: 65 to 35
+  Match 3:   Student   vs AB_Improved   Result: 70 to 30
+
+
+Results:
+----------
+Student             71.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=-1, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 76 to 24
+  Match 2:   Student   vs   AB_Open     Result: 62 to 38
+  Match 3:   Student   vs AB_Improved   Result: 66 to 34
+
+
+Results:
+----------
+Student             68.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=-24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 66 to 34
+  Match 3:   Student   vs AB_Improved   Result: 61 to 39
+
+
+Results:
+----------
+Student             68.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=-16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 83 to 17
+  Match 2:   Student   vs   AB_Open     Result: 64 to 36
+  Match 3:   Student   vs AB_Improved   Result: 52 to 48
+
+
+Results:
+----------
+Student             66.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 69 to 31
+  Match 2:   Student   vs   AB_Open     Result: 67 to 33
+  Match 3:   Student   vs AB_Improved   Result: 62 to 38
+
+
+Results:
+----------
+Student             66.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 76 to 24
+  Match 2:   Student   vs   AB_Open     Result: 64 to 36
+  Match 3:   Student   vs AB_Improved   Result: 58 to 42
+
+
+Results:
+----------
+Student             66.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 77 to 23
+  Match 2:   Student   vs   AB_Open     Result: 71 to 29
+  Match 3:   Student   vs AB_Improved   Result: 54 to 46
+
+
+Results:
+----------
+Student             67.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 83 to 17
+  Match 2:   Student   vs   AB_Open     Result: 66 to 34
+  Match 3:   Student   vs AB_Improved   Result: 53 to 47
+
+
+Results:
+----------
+Student             67.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=0, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 83 to 17
+  Match 2:   Student   vs   AB_Open     Result: 67 to 33
+  Match 3:   Student   vs AB_Improved   Result: 65 to 35
+
+
+Results:
+----------
+Student             71.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=-24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 81 to 19
+  Match 2:   Student   vs   AB_Open     Result: 66 to 34
+  Match 3:   Student   vs AB_Improved   Result: 57 to 43
+
+
+Results:
+----------
+Student             68.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=-16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 80 to 20
+  Match 2:   Student   vs   AB_Open     Result: 70 to 30
+  Match 3:   Student   vs AB_Improved   Result: 64 to 36
+
+
+Results:
+----------
+Student             71.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 76 to 24
+  Match 2:   Student   vs   AB_Open     Result: 61 to 39
+  Match 3:   Student   vs AB_Improved   Result: 62 to 38
+
+
+Results:
+----------
+Student             66.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 76 to 24
+  Match 2:   Student   vs   AB_Open     Result: 62 to 38
+  Match 3:   Student   vs AB_Improved   Result: 62 to 38
+
+
+Results:
+----------
+Student             66.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 71 to 29
+  Match 3:   Student   vs AB_Improved   Result: 64 to 36
+
+
+Results:
+----------
+Student             71.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 74 to 26
+  Match 2:   Student   vs   AB_Open     Result: 58 to 42
+  Match 3:   Student   vs AB_Improved   Result: 57 to 43
+
+
+Results:
+----------
+Student             63.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=1, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 58 to 42
+  Match 3:   Student   vs AB_Improved   Result: 69 to 31
+
+
+Results:
+----------
+Student             68.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=-24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 61 to 39
+  Match 3:   Student   vs AB_Improved   Result: 53 to 47
+
+
+Results:
+----------
+Student             64.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=-16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 74 to 26
+  Match 2:   Student   vs   AB_Open     Result: 66 to 34
+  Match 3:   Student   vs AB_Improved   Result: 60 to 40
+
+
+Results:
+----------
+Student             66.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=-8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 80 to 20
+  Match 2:   Student   vs   AB_Open     Result: 59 to 41
+  Match 3:   Student   vs AB_Improved   Result: 57 to 43
+
+
+Results:
+----------
+Student             65.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=0
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 75 to 25
+  Match 2:   Student   vs   AB_Open     Result: 56 to 44
+  Match 3:   Student   vs AB_Improved   Result: 55 to 45
+
+
+Results:
+----------
+Student             62.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=8
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 83 to 17
+  Match 2:   Student   vs   AB_Open     Result: 57 to 43
+  Match 3:   Student   vs AB_Improved   Result: 57 to 43
+
+
+Results:
+----------
+Student             65.67%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=16
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 78 to 22
+  Match 2:   Student   vs   AB_Open     Result: 65 to 35
+  Match 3:   Student   vs AB_Improved   Result: 55 to 45
+
+
+Results:
+----------
+Student             66.00%
+current best: 75.33333333333333,
+a=2, b=-3, c=16
+
+*************************
+Evaluating: a=2, b=2, c=24
+*************************
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   AB_Null     Result: 72 to 28
+  Match 2:   Student   vs   AB_Open     Result: 65 to 35
+  Match 3:   Student   vs AB_Improved   Result: 62 to 38
+
+
+Results:
+----------
+Student             66.33%
+current best: 75.33333333333333,
+a=2, b=-3, c=16

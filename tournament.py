@@ -240,16 +240,16 @@ def grid_search():
     max_win_ratio = float("-inf")
     max_parameters = (-10, -10, -20)
 
-    for a in range(-10, 10):
-        for b in range(-10, 10):
-            for c in range(-20, 20, 2):
+    for a in range(-3, 3):
+        for b in range(-3, 3):
+            for c in (-24, -16, -8, 0, 8, 16, 24):
                 print("")
                 print("*************************")
                 print("{:^25}".format("Evaluating: a={}, b={}, c={}".format(a,b,c)))
                 print("*************************")
                 agentUT = Agent(CustomPlayer(score_fn=generate_custom_score(a,b,c), **STUDENT_CUSTOM_ARGS), "Student")
-                agents = random_agents + mm_agents + ab_agents + [agentUT]
-                win_ratio = play_round(agents, NUM_MATCHES)
+                agents = ab_agents + [agentUT]
+                win_ratio = play_round(agents, 25)
 
                 print("\n\nResults:")
                 print("----------")
@@ -263,4 +263,4 @@ def grid_search():
                 print("a={}, b={}, c={}".format(max_parameters[0], max_parameters[1], max_parameters[2]) )
 
 if __name__ == "__main__":
-    main2(25, 10)
+    main2(25, 2)

@@ -136,7 +136,7 @@ def common_moves_score(game, player):
 
     # intersection of common moves
     common_moves = moves & opponent_moves
-    return len(moves) - len(common_moves)
+    return len(common_moves)
 
 def distance_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
@@ -203,7 +203,7 @@ def custom_score(game, player):
         The heuristic value of the current game state to the specified player.
     """
     return (
-        parametrized_moves_score(game, player, 2, -1, 8)
+        parametrized_moves_score(game, player, 2, -3, 16)
         + distance_score(game, player)
         #+ common_moves_score(game, player)
         )
