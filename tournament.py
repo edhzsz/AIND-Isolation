@@ -208,15 +208,12 @@ def main2(num_matches=10, num_tournaments=2):
     test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
                    Agent(CustomPlayer(score_fn=custom_score, **STUDENT_CUSTOM_ARGS), "Student")]
 
-    thefile = open('test.txt', 'w')
-
     for tournament in range(num_tournaments):
         for agentUT in test_agents:
             agents = random_agents + mm_agents + ab_agents + [agentUT]
             win_ratio = play_round(agents, num_matches)
 
             print("{!s:<15}{:>10.2f}%".format(agentUT.name, win_ratio))
-            thefile.write("{}, {}%".format(agentUT.name, win_ratio))
 
         print("----------")
 
@@ -240,8 +237,10 @@ def grid_search():
     max_win_ratio = float("-inf")
     max_parameters = (-10, -10, -20)
 
-    for a in range(-3, 3):
-        for b in range(-3, 3):
+    thefile = open('grid_search_results.txt', 'w')
+
+    for a in range(-3, 4):
+        for b in range(-3, 4):
             for c in (-24, -16, -8, 0, 8, 16, 24):
                 print("")
                 print("*************************")
@@ -255,6 +254,8 @@ def grid_search():
                 print("----------")
                 print("{!s:<15}{:>10.2f}%".format(agentUT.name, win_ratio))
 
+                thefile.write("{},{},{}: {}%\n".format(a,b,c, win_ratio))
+
                 if win_ratio > max_win_ratio:
                     max_win_ratio = win_ratio
                     max_parameters = (a, b, c)
@@ -263,4 +264,4 @@ def grid_search():
                 print("a={}, b={}, c={}".format(max_parameters[0], max_parameters[1], max_parameters[2]) )
 
 if __name__ == "__main__":
-    main2(25, 2)
+    grid_search()

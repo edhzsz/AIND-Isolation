@@ -1,30 +1,50 @@
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 95 to 5
+  Match 1: ID_Improved vs   Random      Result: 95 to 5
+  Match 2: ID_Improved vs   MM_Null     Result: 83 to 17
+  Match 3: ID_Improved vs   MM_Open     Result: 79 to 21
+  Match 4: ID_Improved vs MM_Improved   Result: 64 to 36
+  Match 5: ID_Improved vs   AB_Null     Result: 70 to 30
+  Match 6: ID_Improved vs   AB_Open     Result: 70 to 30
+  Match 7: ID_Improved vs AB_Improved   Result: 68 to 32
+ID_Improved         75.57%
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   Random      Result: 94 to 6
   Match 2:   Student   vs   MM_Null     Result: 87 to 13
-  Match 3:   Student   vs   MM_Open     Result: 77 to 23
-  Match 4:   Student   vs MM_Improved   Result: 74 to 26
-  Match 5:   Student   vs   AB_Null     Result: 80 to 20
-  Match 6:   Student   vs   AB_Open     Result: 73 to 27
-  Match 7:   Student   vs AB_Improved   Result: 62 to 38
-Student             78.29%
-Student, 78.28571428571429%
+  Match 3:   Student   vs   MM_Open     Result: 74 to 26
+  Match 4:   Student   vs MM_Improved   Result: 68 to 32
+  Match 5:   Student   vs   AB_Null     Result: 78 to 22
+  Match 6:   Student   vs   AB_Open     Result: 64 to 36
+  Match 7:   Student   vs AB_Improved   Result: 65 to 35
+Student             75.71%
 ----------
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 95 to 5
-  Match 2:   Student   vs   MM_Null     Result: 88 to 12
-  Match 3:   Student   vs   MM_Open     Result: 67 to 33
-  Match 4:   Student   vs MM_Improved   Result: 71 to 29
+  Match 1: ID_Improved vs   Random      Result: 93 to 7
+  Match 2: ID_Improved vs   MM_Null     Result: 86 to 14
+  Match 3: ID_Improved vs   MM_Open     Result: 71 to 29
+  Match 4: ID_Improved vs MM_Improved   Result: 70 to 30
+  Match 5: ID_Improved vs   AB_Null     Result: 79 to 21
+  Match 6: ID_Improved vs   AB_Open     Result: 65 to 35
+  Match 7: ID_Improved vs AB_Improved   Result: 64 to 36
+ID_Improved         75.43%
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   Random      Result: 94 to 6
+  Match 2:   Student   vs   MM_Null     Result: 86 to 14
+  Match 3:   Student   vs   MM_Open     Result: 74 to 26
+  Match 4:   Student   vs MM_Improved   Result: 76 to 24
   Match 5:   Student   vs   AB_Null     Result: 80 to 20
-  Match 6:   Student   vs   AB_Open     Result: 72 to 28
+  Match 6:   Student   vs   AB_Open     Result: 64 to 36
   Match 7:   Student   vs AB_Improved   Result: 62 to 38
-Student             76.43%
-Student, 76.42857142857143%
+Student             76.57%
 ----------
 
-
+------------------------------------------------------------------------------
 Grid search
 
 *************************
