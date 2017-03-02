@@ -172,7 +172,7 @@ def distance_score(game, player):
     # distance from players
     distance = (abs(location[0] - opponent_location[0])
                 + abs(location[1] - opponent_location[1]))
-    return distance
+    return 15 - distance
 
 def generate_custom_score(a, b, c):
     def __score__(game, player):
@@ -203,8 +203,8 @@ def custom_score(game, player):
         The heuristic value of the current game state to the specified player.
     """
     return (
-        parametrized_moves_score(game, player, 2, -3, 16)
-        + distance_score(game, player)
+        parametrized_moves_score(game, player, 1, -2, -8)
+        #+ distance_score(game, player)
         #+ common_moves_score(game, player)
         )
 
@@ -290,11 +290,11 @@ class CustomPlayer(object):
         # Perform any required initializations, including selecting an initial
         # move from the game board (i.e., an opening book), or returning
         # immediately if there are no legal moves
-        move = (-1, -1)
-        score = 0.12345
+        best_move = (-1, -1)
+        best_score = float("-inf")
 
         if not legal_moves:
-            return move
+            return best_move
 
         search_method = (self.minimax
                          if self.method == 'minimax'
@@ -318,6 +318,10 @@ class CustomPlayer(object):
                 score, move = search_method(game, depth)
                 depth = depth + 1
 
+                if score > best_score:
+                    best_move = move
+                    best_score = score
+
                 if not self.used_score_fn:
                     break
 
@@ -326,11 +330,11 @@ class CustomPlayer(object):
 
         # if move is invalid (i.e (-1, -1)) after timeout or not found good move
         # select randomly one of the legal moves
-        if move == (-1, -1):
-            move = legal_moves[random.randint(0, len(legal_moves) - 1)]
-        
+        if best_move == (-1, -1):
+            best_move = legal_moves[random.randint(0, len(legal_moves) - 1)]
+
         # Return the best move from the last completed search iteration
-        return move
+        return best_move
 
     def minimax(self, game, depth, maximizing_player=True):
         """Implement the minimax search algorithm as described in the lectures.
@@ -367,11 +371,15 @@ class CustomPlayer(object):
             raise Timeout()
 
         best_score = float("-inf") if maximizing_player else float("inf")
-        best_move = (-1, -1)
+        best_move = game.get_player_location(self) # best move is my current position
 
         legal_moves = game.get_legal_moves()
 
-        if not legal_moves or depth == 0:
+        if not legal_moves:
+            return self.score(game, self), best_move
+
+        if depth == 0:
+            self.used_score_fn = True
             return self.score(game, self), best_move
 
         for move in legal_moves:
@@ -432,7 +440,7 @@ class CustomPlayer(object):
             raise Timeout()
 
         best_score = float("-inf") if maximizing_player else float("inf")
-        best_move = (-1, -1)
+        best_move = game.get_player_location(self) # best move is my current position
 
         # if alpha or beta are maxed up, just give up early
         if maximizing_player and beta == float("-inf"):
