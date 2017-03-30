@@ -205,12 +205,12 @@ def main2(num_matches=10, num_tournaments=2):
     # systems; i.e., the performance of the student agent is considered
     # relative to the performance of the ID_Improved agent to account for
     # faster or slower computers.
-    test_agents = [#Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
+    test_agents = [Agent(CustomPlayer(score_fn=improved_score, **CUSTOM_ARGS), "ID_Improved"),
                    Agent(CustomPlayer(score_fn=custom_score, **STUDENT_CUSTOM_ARGS), "Student")]
 
     for tournament in range(num_tournaments):
         for agentUT in test_agents:
-            agents = ab_agents + [agentUT]
+            agents = random_agents + mm_agents + ab_agents + [agentUT]
             win_ratio = play_round(agents, num_matches)
 
             print("{!s:<15}{:>10.2f}%".format(agentUT.name, win_ratio))
@@ -264,4 +264,4 @@ def grid_search():
                 print("a={}, b={}, c={}".format(max_parameters[0], max_parameters[1], max_parameters[2]) )
 
 if __name__ == "__main__":
-    main2(10, 1)
+    main2(10, 5)

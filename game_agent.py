@@ -13,64 +13,6 @@ class Timeout(Exception):
     """Subclass base exception for code clarity."""
     pass
 
-def get_cached_legal_moves(self, player=None):
-    """
-    Return the list of all legal moves for the specified player.
-
-    Parameters
-    ----------
-    player : object (optional)
-        An object registered as a player in the current game. If None,
-        return the legal moves for the active player on the board.
-
-    Returns
-    ----------
-    list<(int, int)>
-        The list of coordinate pairs (row, column) of all legal moves
-        for the player constrained by the current game state.
-    """
-    if not hasattr(self, 'moves_cache'):
-        self.moves_cache = {}
-
-    if player is None:
-        player = self.active_player
-
-    valid_moves = self.moves_cache.get(player, None)
-
-    if valid_moves:
-        return valid_moves
-
-    valid_moves = self.__get_moves__(self.__last_player_move__[player])
-
-    self.moves_cache[player] = valid_moves
-
-    return valid_moves
-
-def cached_apply_move(self, move):
-    """
-    Move the active player to a specified location.
-
-    Parameters
-    ----------
-    move : (int, int)
-        A coordinate pair (row, column) indicating the next position for
-        the active player on the board.
-
-    Returns
-    ----------
-    None
-    """
-    row, col = move
-    self.__last_player_move__[self.active_player] = move
-    self.__board_state__[row][col] = self.__player_symbols__[self.active_player]
-    self.__active_player__, self.__inactive_player__ = self.__inactive_player__, self.__active_player__
-    self.move_count += 1
-    # clean the valid moves cache
-    self.moves_cache = {}
-
-Board.get_legal_moves = get_cached_legal_moves
-Board.apply_move = cached_apply_move
-
 def parametrized_moves_score(game, player, a, b, c):
     """The basic evaluation function described in lecture that outputs a score
     equal to the number of moves open for your computer player on the board.
@@ -203,9 +145,9 @@ def custom_score(game, player):
         The heuristic value of the current game state to the specified player.
     """
     return (
-        parametrized_moves_score(game, player, 1, -2, -8)
-        #+ distance_score(game, player)
-        #+ common_moves_score(game, player)
+        #parametrized_moves_score(game, player, 1, -2, -8)
+        distance_score(game, player)
+        #common_moves_score(game, player)
         )
 
 class CustomPlayer(object):
