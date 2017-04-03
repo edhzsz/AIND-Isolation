@@ -43,11 +43,12 @@ def parametrized_moves_score(game, player, a, b, c):
     opponent = game.get_opponent(player)
     opponent_moves = game.get_legal_moves(opponent)
 
-    return  a * len(moves) + b * len(opponent_moves) + c
+    return float(a * len(moves) + b * len(opponent_moves) + c)
 
 def common_moves_score(game, player):
-    """The basic evaluation function described in lecture that outputs a score
-    equal to the number of moves open for your computer player on the board.
+    """This heuristic function calculates the size of the intersection of the sets of
+        available moves of each player. The board score is positive if the active player
+        is the current player and negative otherwise.
 
     Parameters
     ----------
@@ -78,7 +79,11 @@ def common_moves_score(game, player):
 
     # intersection of common moves
     common_moves = moves & opponent_moves
-    return len(common_moves)
+    score = float(len(common_moves))
+
+    multiplier = 1 if player == game.active_player else -1
+
+    return multiplier * score
 
 def distance_score(game, player):
     """The basic evaluation function described in lecture that outputs a score
@@ -114,7 +119,7 @@ def distance_score(game, player):
     # distance from players
     distance = (abs(location[0] - opponent_location[0])
                 + abs(location[1] - opponent_location[1]))
-    return 15 - distance
+    return float(15 - distance)
 
 def generate_custom_score(a, b, c):
     def __score__(game, player):
@@ -144,11 +149,7 @@ def custom_score(game, player):
     float
         The heuristic value of the current game state to the specified player.
     """
-    return (
-        #parametrized_moves_score(game, player, 1, -2, -8)
-        distance_score(game, player)
-        #common_moves_score(game, player)
-        )
+    return parametrized_moves_score(game, player, 1, -2, -8)
 
 class CustomPlayer(object):
     """Game-playing agent that chooses a move using your evaluation function
