@@ -68,41 +68,7 @@ were the active agent can close options for the opponent possibly creating a
 partition. Thus, when the active player is our agent the score is positive
 meaning that from this board some good moves can be possible done and viceversa.
 
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 34 to 6
-  Match 2:   Student   vs   MM_Null     Result: 25 to 15
-  Match 3:   Student   vs   MM_Open     Result: 24 to 16
-  Match 4:   Student   vs MM_Improved   Result: 22 to 18
-  Match 5:   Student   vs   AB_Null     Result: 25 to 15
-  Match 6:   Student   vs   AB_Open     Result: 17 to 23
-  Match 7:   Student   vs AB_Improved   Result: 16 to 24
-Student             58.21%
-----------
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 29 to 11
-  Match 2:   Student   vs   MM_Null     Result: 23 to 17
-  Match 3:   Student   vs   MM_Open     Result: 20 to 20
-  Match 4:   Student   vs MM_Improved   Result: 17 to 23
-  Match 5:   Student   vs   AB_Null     Result: 25 to 15
-  Match 6:   Student   vs   AB_Open     Result: 22 to 18
-  Match 7:   Student   vs AB_Improved   Result: 17 to 23
-Student             54.64%
-----------
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 33 to 7
-  Match 2:   Student   vs   MM_Null     Result: 26 to 14
-  Match 3:   Student   vs   MM_Open     Result: 19 to 21
-  Match 4:   Student   vs MM_Improved   Result: 17 to 23
-  Match 5:   Student   vs   AB_Null     Result: 22 to 18
-  Match 6:   Student   vs   AB_Open     Result: 18 to 22
-  Match 7:   Student   vs AB_Improved   Result: 16 to 24
-Student             53.93%
-----------
+A tipical tournament for this agent was as follows:
 
 Playing Matches:
 ----------
@@ -116,136 +82,78 @@ Playing Matches:
 Student             55.71%
 ----------
 
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 29 to 11
-  Match 2:   Student   vs   MM_Null     Result: 24 to 16
-  Match 3:   Student   vs   MM_Open     Result: 18 to 22
-  Match 4:   Student   vs MM_Improved   Result: 23 to 17
-  Match 5:   Student   vs   AB_Null     Result: 25 to 15
-  Match 6:   Student   vs   AB_Open     Result: 18 to 22
-  Match 7:   Student   vs AB_Improved   Result: 17 to 23
-Student             55.00%
-----------
+This agent played in total 1400 games and won 777 of them giving it a total
+score of 55.50% which is extremelly lower than the *ID_Improved* agent's score.
 
 ### Distance to the opponent
 
 This heuristic function calculates the distance between the two players.
 
-The rationale behind this heuristic is that it is better to be further away from
-the opponent 
+The rationale behind this heuristic is that it could be better to be further
+away from the opponent and prevent the blocking of movements.
+
+A tipical tournament for this agent was as follows:
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 33 to 7
-  Match 2:   Student   vs   MM_Null     Result: 24 to 16
-  Match 3:   Student   vs   MM_Open     Result: 19 to 21
-  Match 4:   Student   vs MM_Improved   Result: 23 to 17
-  Match 5:   Student   vs   AB_Null     Result: 17 to 23
-  Match 6:   Student   vs   AB_Open     Result: 23 to 17
-  Match 7:   Student   vs AB_Improved   Result: 15 to 25
-Student             55.00%
-----------
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 31 to 9
-  Match 2:   Student   vs   MM_Null     Result: 27 to 13
-  Match 3:   Student   vs   MM_Open     Result: 19 to 21
-  Match 4:   Student   vs MM_Improved   Result: 22 to 18
-  Match 5:   Student   vs   AB_Null     Result: 28 to 12
-  Match 6:   Student   vs   AB_Open     Result: 21 to 19
-  Match 7:   Student   vs AB_Improved   Result: 16 to 24
-Student             58.57%
-----------
-
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 34 to 6
-  Match 2:   Student   vs   MM_Null     Result: 28 to 12
-  Match 3:   Student   vs   MM_Open     Result: 18 to 22
-  Match 4:   Student   vs MM_Improved   Result: 18 to 22
-  Match 5:   Student   vs   AB_Null     Result: 22 to 18
-  Match 6:   Student   vs   AB_Open     Result: 18 to 22
-  Match 7:   Student   vs AB_Improved   Result: 22 to 18
-Student             57.14%
-----------
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 30 to 10
-  Match 2:   Student   vs   MM_Null     Result: 29 to 11
-  Match 3:   Student   vs   MM_Open     Result: 20 to 20
-  Match 4:   Student   vs MM_Improved   Result: 17 to 23
-  Match 5:   Student   vs   AB_Null     Result: 22 to 18
-  Match 6:   Student   vs   AB_Open     Result: 20 to 20
-  Match 7:   Student   vs AB_Improved   Result: 23 to 17
-Student             57.50%
-----------
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 35 to 5
-  Match 2:   Student   vs   MM_Null     Result: 28 to 12
-  Match 3:   Student   vs   MM_Open     Result: 20 to 20
+  Match 1:   Student   vs   Random      Result: 32 to 8
+  Match 2:   Student   vs   MM_Null     Result: 26 to 14
+  Match 3:   Student   vs   MM_Open     Result: 17 to 23
   Match 4:   Student   vs MM_Improved   Result: 19 to 21
-  Match 5:   Student   vs   AB_Null     Result: 23 to 17
-  Match 6:   Student   vs   AB_Open     Result: 21 to 19
+  Match 5:   Student   vs   AB_Null     Result: 24 to 16
+  Match 6:   Student   vs   AB_Open     Result: 22 to 18
   Match 7:   Student   vs AB_Improved   Result: 18 to 22
-Student             58.57%
+Student             56.43%
 ----------
+
+This agent played in total 1400 games and won 789 of them giving it a total
+score of 56.35% which is better than the _common moves_ agent, but still a lot
+worse than the *ID_Improved* agent.
 
 ### Linear combination of moves
 
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 38 to 2
-  Match 2:   Student   vs   MM_Null     Result: 35 to 5
-  Match 3:   Student   vs   MM_Open     Result: 30 to 10
-  Match 4:   Student   vs MM_Improved   Result: 31 to 9
-  Match 5:   Student   vs   AB_Null     Result: 33 to 7
-  Match 6:   Student   vs   AB_Open     Result: 27 to 13
-  Match 7:   Student   vs AB_Improved   Result: 26 to 14
-Student             78.57%
-----------
+The heuristics presented in the lectures are based on the number of available
+moves that each agent has with a preference for the boards that have more available
+movements for the player. It is suggested that other combinations can be implemented
+assigning different weights to each player moves creating a family of heuristics
+generated by the linear combination of the variables:
 
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 39 to 1
-  Match 2:   Student   vs   MM_Null     Result: 35 to 5
-  Match 3:   Student   vs   MM_Open     Result: 32 to 8
-  Match 4:   Student   vs MM_Improved   Result: 33 to 7
-  Match 5:   Student   vs   AB_Null     Result: 35 to 5
-  Match 6:   Student   vs   AB_Open     Result: 27 to 13
-  Match 7:   Student   vs AB_Improved   Result: 27 to 13
-Student             81.43%
-----------
+    x - amount of open moves of the player
+    y - amount of open moves of the opponent
 
+Each heuristic has the form:
 
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 40 to 0
-  Match 2:   Student   vs   MM_Null     Result: 37 to 3
-  Match 3:   Student   vs   MM_Open     Result: 28 to 12
-  Match 4:   Student   vs MM_Improved   Result: 30 to 10
-  Match 5:   Student   vs   AB_Null     Result: 29 to 11
-  Match 6:   Student   vs   AB_Open     Result: 27 to 13
-  Match 7:   Student   vs AB_Improved   Result: 30 to 10
-Student             78.93%
-----------
+     h = a*x + b*y + c
 
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 38 to 2
-  Match 2:   Student   vs   MM_Null     Result: 38 to 2
-  Match 3:   Student   vs   MM_Open     Result: 31 to 9
-  Match 4:   Student   vs MM_Improved   Result: 31 to 9
-  Match 5:   Student   vs   AB_Null     Result: 32 to 8
-  Match 6:   Student   vs   AB_Open     Result: 26 to 14
-  Match 7:   Student   vs AB_Improved   Result: 29 to 11
-Student             80.36%
-----------
+It is possible to perform a grid search over the values of a,b,c to find the values
+that maximize the heuristic score.
+
+A grid search was performed restricting the possible values of a,b, and c
+to following ranges:
+
+     -3 <= x,y <= 3
+     c in {-24, -16, -8, 0, 8, 16, 24}
+
+The selected ranges are mostly arbitrary and were kept small in order to be able
+to execute the search in reasonable time.
+
+The evaluation of each heuristic was performed by running a tournament of 100
+matches against the _AB_ agent and counting the winning matches. The results of
+the whole grid search can be found in the file
+[grid_search_results.txt](https://github.com/edhzsz/AIND-Isolation/blob/master/grid_search_results.txt)
+in this repository.
+
+The best values found are:
+a = 1
+b = -2
+c = -8
+Which got a score of 75.33%.
+
+It is worth noting that the _open moves_ and _improved_ heuristics described in the
+lectures were also evaluated and they got a score of 67.66% and 68.33% respectively.
+
+An agent was generated and tested using this values and the results of a tipical
+tournament for this agent are as follows:
 
 Playing Matches:
 ----------
@@ -258,3 +166,8 @@ Playing Matches:
   Match 7:   Student   vs AB_Improved   Result: 29 to 11
 Student             80.36%
 ----------
+
+This agent played in total 1400 games and won 1119 of them giving it a total
+score of 79.92% which is better than the *ID_Improved* agent's score making
+it suitable to be used as the evaluation function by an agent that plays
+the Isolation game with horses.
