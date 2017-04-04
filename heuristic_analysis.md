@@ -70,62 +70,62 @@ meaning that from this board some good moves can be possible done and viceversa.
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 35 to 5
-  Match 2:   Student   vs   MM_Null     Result: 27 to 13
-  Match 3:   Student   vs   MM_Open     Result: 15 to 25
-  Match 4:   Student   vs MM_Improved   Result: 18 to 22
-  Match 5:   Student   vs   AB_Null     Result: 26 to 14
-  Match 6:   Student   vs   AB_Open     Result: 23 to 17
-  Match 7:   Student   vs AB_Improved   Result: 17 to 23
-Student             57.50%
+  Match 1:   Student   vs   Random      Result: 34 to 6
+  Match 2:   Student   vs   MM_Null     Result: 25 to 15
+  Match 3:   Student   vs   MM_Open     Result: 24 to 16
+  Match 4:   Student   vs MM_Improved   Result: 22 to 18
+  Match 5:   Student   vs   AB_Null     Result: 25 to 15
+  Match 6:   Student   vs   AB_Open     Result: 17 to 23
+  Match 7:   Student   vs AB_Improved   Result: 16 to 24
+Student             58.21%
 ----------
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 36 to 4
-  Match 2:   Student   vs   MM_Null     Result: 27 to 13
+  Match 1:   Student   vs   Random      Result: 29 to 11
+  Match 2:   Student   vs   MM_Null     Result: 23 to 17
+  Match 3:   Student   vs   MM_Open     Result: 20 to 20
+  Match 4:   Student   vs MM_Improved   Result: 17 to 23
+  Match 5:   Student   vs   AB_Null     Result: 25 to 15
+  Match 6:   Student   vs   AB_Open     Result: 22 to 18
+  Match 7:   Student   vs AB_Improved   Result: 17 to 23
+Student             54.64%
+----------
+
+Playing Matches:
+----------
+  Match 1:   Student   vs   Random      Result: 33 to 7
+  Match 2:   Student   vs   MM_Null     Result: 26 to 14
   Match 3:   Student   vs   MM_Open     Result: 19 to 21
   Match 4:   Student   vs MM_Improved   Result: 17 to 23
   Match 5:   Student   vs   AB_Null     Result: 22 to 18
-  Match 6:   Student   vs   AB_Open     Result: 20 to 20
-  Match 7:   Student   vs AB_Improved   Result: 17 to 23
-Student             56.43%
+  Match 6:   Student   vs   AB_Open     Result: 18 to 22
+  Match 7:   Student   vs AB_Improved   Result: 16 to 24
+Student             53.93%
 ----------
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 31 to 9
-  Match 2:   Student   vs   MM_Null     Result: 26 to 14
-  Match 3:   Student   vs   MM_Open     Result: 21 to 19
-  Match 4:   Student   vs MM_Improved   Result: 19 to 21
+  Match 1:   Student   vs   Random      Result: 30 to 10
+  Match 2:   Student   vs   MM_Null     Result: 24 to 16
+  Match 3:   Student   vs   MM_Open     Result: 24 to 16
+  Match 4:   Student   vs MM_Improved   Result: 15 to 25
   Match 5:   Student   vs   AB_Null     Result: 25 to 15
-  Match 6:   Student   vs   AB_Open     Result: 17 to 23
-  Match 7:   Student   vs AB_Improved   Result: 19 to 21
-Student             56.43%
+  Match 6:   Student   vs   AB_Open     Result: 21 to 19
+  Match 7:   Student   vs AB_Improved   Result: 17 to 23
+Student             55.71%
 ----------
 
 Playing Matches:
 ----------
-  Match 1:   Student   vs   Random      Result: 37 to 3
-  Match 2:   Student   vs   MM_Null     Result: 27 to 13
-  Match 3:   Student   vs   MM_Open     Result: 15 to 25
-  Match 4:   Student   vs MM_Improved   Result: 20 to 20
-  Match 5:   Student   vs   AB_Null     Result: 21 to 19
-  Match 6:   Student   vs   AB_Open     Result: 16 to 24
-  Match 7:   Student   vs AB_Improved   Result: 11 to 29
-Student             52.50%
-----------
-
-Playing Matches:
-----------
-  Match 1:   Student   vs   Random      Result: 37 to 3
-  Match 2:   Student   vs   MM_Null     Result: 26 to 14
-  Match 3:   Student   vs   MM_Open     Result: 21 to 19
-  Match 4:   Student   vs MM_Improved   Result: 18 to 22
-  Match 5:   Student   vs   AB_Null     Result: 28 to 12
-  Match 6:   Student   vs   AB_Open     Result: 16 to 24
-  Match 7:   Student   vs AB_Improved   Result: 13 to 27
-Student             56.79%
+  Match 1:   Student   vs   Random      Result: 29 to 11
+  Match 2:   Student   vs   MM_Null     Result: 24 to 16
+  Match 3:   Student   vs   MM_Open     Result: 18 to 22
+  Match 4:   Student   vs MM_Improved   Result: 23 to 17
+  Match 5:   Student   vs   AB_Null     Result: 25 to 15
+  Match 6:   Student   vs   AB_Open     Result: 18 to 22
+  Match 7:   Student   vs AB_Improved   Result: 17 to 23
+Student             55.00%
 ----------
 
 ### Distance to the opponent
@@ -209,7 +209,6 @@ Playing Matches:
   Match 7:   Student   vs AB_Improved   Result: 26 to 14
 Student             78.57%
 ----------
-
 
 Playing Matches:
 ----------
