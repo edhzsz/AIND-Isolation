@@ -21,4 +21,17 @@ and
 
 <img src="https://latex.codecogs.com/gif.latex?\lim_{p&space;\rightarrow&space;-\infty&space;}M_p(a)=\min(a_1,...,a_n)" title="min aproximation" /></a>
 
-The first derivative of the p-mean function could be
+This allows to identify "in an interesting way that leaf in a game tree upon whose
+value the value at the root depends most strongly".
+
+The algorithm presented is an example of a penalty based iterative search heuristic
+method. This means that a non-negative value, called penalty, is assigned to each
+node and the search tree is iteratively grown one step a time by expanding the tip
+node with the least penalty. The estimated value of each node (the heuristic) is
+updated each time the search tree grows.
+
+In the algorithm presented the derivatives of the _p-mean_ functions are used to
+calculate the "sensivity" of the root node to changes in the values of each tip
+node. This sensitivity, in turn, is used to calculate the value of the penalty.
+
+
