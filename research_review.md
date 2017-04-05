@@ -34,4 +34,25 @@ In the algorithm presented the derivatives of the _p-mean_ functions are used to
 calculate the "sensivity" of the root node to changes in the values of each tip
 node. This sensitivity, in turn, is used to calculate the value of the penalty.
 
+Calculating the generalized p-means is computational difficult beause of the large
+computational cost involved in taking powers and roots but it may allow an improve
+in the play because the min/max approximation favors moves whose min/max value
+can be achieved in several ways over a move whose min/max value can be achieved
+in only one way.
 
+"Another approach is to skip the computation of the generalized mean values altogether, and use the appropriate min or max values instead. (I.e. use bE instead of ~E everywhere.) Since the generalized mean values are intended to approximate the min and max functions anyway, this may not introduce very much error. The main point of using the generalized mean values was for their derivatives, not for the values themselves. We call this variation the "reverse approximation" idea."
+
+An implementation of the algorithm using "reverse aproximation" was compared
+against a straigth forward implementation of
+_iterative deepening minimax search with alpha-beta pruning_ by playing the game
+_Connect-Four_. each strategy was allocated a fixed amount of resources to use
+in computing its move: elapsed CPU time (measured in seconds), and calls to the
+basic "move" subroutine (measured in thousands of calls).
+
+For each experiment, considered 49 different starting positions. For each starting position, two games were played--one with alpha-beta (AB) moving first, and one with min/max approximation (MM) moving firs. it was recorded how many times each strategy won, and how many ties occured. One experiment was run for each of five posible time bounds (1 second to 5 seconds, in one-second intervals), and for five possible move bounds (1000 moves to 5000 moves, in 1000-move increments). Thus, 490 games were played for each resource bound, and 980 games played altogether.
+
+based on time usage alone, alpha-beta seems to be superior to our implementation of the min/max approximation approach.
+However, if we base our comparison on move-based resource limits, the story is reversed: min/max approximation is definitely superior.
+
+Unlike depth-first search schemes (e.g. minimax search with alpha-beta pruning), penalty-based schemes may not perform well unless they are given a large amount of memory
+to work with.
