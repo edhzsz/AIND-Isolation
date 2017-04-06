@@ -11,15 +11,15 @@ is expected to have largest effect on the value".
 The key idea presented in the paper is to use the generalized _p-mean_ functions,
 defined as
 
-<img src="https://latex.codecogs.com/gif.latex?M_p(a)=\left(\frac{1}{n}\sum_{i=1}^na_i^p\right)^{1/p}" title="p-mean" />
+<img src="pmean.gif" title="p-mean" />
 
 to approximate the "min" and "max" operators of _minimax_ by using the facts that
 
-<img src="https://latex.codecogs.com/gif.latex?\lim_{p&space;\rightarrow&space;\infty&space;}M_p(a)=\max(a_1,...,a_n)" title="max aproximation" /></a>
+<img src="plimpmean.gif" title="max aproximation" /></a>
 
 and
 
-<img src="https://latex.codecogs.com/gif.latex?\lim_{p&space;\rightarrow&space;-\infty&space;}M_p(a)=\min(a_1,...,a_n)" title="min aproximation" /></a>
+<img src="nlimpmean.gif" title="min aproximation" /></a>
 
 This allows to identify "in an interesting way that leaf in a game tree upon whose
 value the value at the root depends most strongly".
