@@ -15,11 +15,11 @@ defined as
 
 to approximate the "min" and "max" operators of _minimax_ by using the facts that
 
-<img src="plimpmean.gif" title="max aproximation" /></a>
+<img src="plimpmean.gif" title="max aproximation" />
 
 and
 
-<img src="nlimpmean.gif" title="min aproximation" /></a>
+<img src="nlimpmean.gif" title="min aproximation" />
 
 This allows to identify "in an interesting way that leaf in a game tree upon whose
 value the value at the root depends most strongly".
