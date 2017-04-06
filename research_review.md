@@ -11,15 +11,15 @@ is expected to have largest effect on the value".
 The key idea presented in the paper is to use the generalized _p-mean_ functions,
 defined as
 
-<img src="pmean.gif" title="p-mean" />
+<img src="https://github.com/edhzsz/AIND-Isolation/blob/master/pmean.gif" title="p-mean" />
 
 to approximate the "min" and "max" operators of _minimax_ by using the facts that
 
-<img src="plimpmean.gif" title="max aproximation" />
+<img src="https://github.com/edhzsz/AIND-Isolation/blob/masterplimpmean.gif" title="max aproximation" />
 
 and
 
-<img src="nlimpmean.gif" title="min aproximation" />
+<img src="https://github.com/edhzsz/AIND-Isolation/blob/masternlimpmean.gif" title="min aproximation" />
 
 This allows to identify "in an interesting way that leaf in a game tree upon whose
 value the value at the root depends most strongly".
