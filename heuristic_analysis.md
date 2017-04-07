@@ -54,7 +54,6 @@ score of 77.54%
 
 ## Heuristics Analyzed
 
-
 ### Available moves in common
 
 This heuristic function calculates the size of the intersection of the sets of
@@ -67,7 +66,6 @@ partition. Thus, when the active player is our agent the score is positive
 meaning that from this board some good moves can be possible done and viceversa.
 
 A tipical tournament for this agent was as follows:
-
 
     Match 1:   Student   vs   Random      Result: 30 to 10
     Match 2:   Student   vs   MM_Null     Result: 24 to 16
@@ -161,3 +159,17 @@ This agent played in total 1400 games and won 1119 of them giving it a total
 score of 79.92% which is better than the *ID_Improved* agent's score making
 it suitable to be used as the evaluation function by an agent that plays
 the Isolation game with horses.
+
+## Conclusion
+
+|  Agent                      | Games played | Games Won | Games Lost |  Score |
+|-----------------------------|--------------|-----------|------------|--------|
+| ID_Improved                 |     4200     |    3257   |    943     | 77.54% |
+| Avilable moves In Common    |     1400     |     777   |    623     | 55.50% |
+| Distance to the opponent    |     1400     |     789   |    611     | 56.35% |
+| Linear combination of moves |     1400     |    1119   |    181     | 79.92% |
+
+
+I recommend to use the _Linear combination of moves_ because:
+
+
