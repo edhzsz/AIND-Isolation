@@ -162,14 +162,29 @@ the Isolation game with horses.
 
 ## Conclusion
 
-|  Agent                      | Games played | Games Won | Games Lost |  Score |
-|-----------------------------|--------------|-----------|------------|--------|
-| ID_Improved                 |     4200     |    3257   |    943     | 77.54% |
-| Avilable moves In Common    |     1400     |     777   |    623     | 55.50% |
-| Distance to the opponent    |     1400     |     789   |    611     | 56.35% |
-| Linear combination of moves |     1400     |    1119   |    181     | 79.92% |
+The results of all the agents can be summarized on the following table:
+
+|  Agent                       | Games played | Games Won | Games Lost |  Score |
+|------------------------------|--------------|-----------|------------|--------|
+| ID_Improved                  |     4200     |    3257   |    943     | 77.54% |
+| Available moves In Common    |     1400     |     777   |    623     | 55.50% |
+| Distance to the opponent     |     1400     |     789   |    611     | 56.35% |
+| Linear combination of moves  |     1400     |    1119   |    181     | 79.92% |
 
 
-I recommend to use the _Linear combination of moves_ because:
+I recommend to use the _Linear combination of moves_ agent because:
+- It is the only proposed heuristic that was able to outperform the *ID_Improved*
+agent.
+- Being a linear combination of open moves of both the player and the opponent,
+it is as complex as the _Improved_ heuristic and it is not slower to calculate.
+- It is easy to see that it considers both players to calculate the score giving
+a stronger (negative) weight to the open moves of the opponent. Although it is not
+easy to describe exactly what is being messured.
+- Both, *ID_Improved* and the *Linear combination* agents, traverse the tree to
+basically the same depth. The maximum depth for both is 19 and the minimum is 6.
+The average depth being traversed by the *Id_Improved* is 8,08 and it is 8,43 for
+the *Linear combination* agent. This supports the claim that the complexity of both
+heuristics is similar, but also means that the *Linear combination* heuristic
+estimates better the value of the board and predicts better the final outcome.
 
 
